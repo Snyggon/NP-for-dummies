@@ -3,27 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nationella Prov – Årskurs 9</title>
+  <title>Nationella Prov – Årskurs 9 VT 2026</title>
   <style>
     :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
       --surface2: #22263a;
-      --border: #2e3350;
-      --accent: #4f7fff;
-      --accent2: #7c5cff;
-      --text: #e8eaf6;
-      --muted: #8b90b0;
-      --green: #3ecf8e;
-      --red: #ff6b6b;
-      --yellow: #ffd166;
-      --orange: #ff9a3c;
+      --border:   #2e3350;
+      --text:     #e8eaf6;
+      --muted:    #8b90b0;
+      --accent:   #4f7fff;
 
-      --sv: #4f7fff;
-      --en: #3ecf8e;
-      --ma: #ff6b6b;
-      --no: #ffd166;
-      --so: #a78bfa;
+      --sv-c: #4f7fff;
+      --en-c: #3ecf8e;
+      --no-c: #ffd166;
+      --so-c: #a78bfa;
+      --ma-c: #ff6b6b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,678 +27,996 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    /* ── HEADER ─────────────────────────────────────────── */
-    header {
-      background: linear-gradient(135deg, #1a1d27 0%, #12152a 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 1.5rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      font-size: 1.3rem;
-    }
-
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    h1 span {
-      color: var(--muted);
-      font-weight: 400;
-      font-size: 0.95rem;
-      display: block;
-    }
-
-    .next-exam-pill {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 0.5rem 1.1rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .next-exam-pill strong {
-      color: var(--text);
-    }
-
-    .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* ── COUNTDOWN ─────────────────────────────────────── */
-    .countdown-bar {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      padding-bottom: 1.5rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .countdown-bar::-webkit-scrollbar { display: none; }
-
-    .countdown-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.4rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-      min-width: 160px;
-    }
-
-    .countdown-card .label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.3rem;
-    }
-
-    .countdown-card .subject {
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .countdown-card .days {
-      font-size: 1.6rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .countdown-card .days span {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: var(--muted);
-    }
-
-    /* ── MAIN ────────────────────────────────────────────── */
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
-    }
-
-    /* ── FILTERS ─────────────────────────────────────────── */
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .filter-btn {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      border-radius: 100px;
-      padding: 0.45rem 1rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
-    }
-
-    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
-
-    .filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .filter-btn[data-filter="sv"].active  { background: var(--sv); border-color: var(--sv); }
-    .filter-btn[data-filter="en"].active  { background: var(--en); border-color: var(--en); color: #0a1a0a; }
-    .filter-btn[data-filter="ma"].active  { background: var(--ma); border-color: var(--ma); }
-    .filter-btn[data-filter="no"].active  { background: var(--no); border-color: var(--no); color: #1a1400; }
-    .filter-btn[data-filter="so"].active  { background: var(--so); border-color: var(--so); }
-
-    /* ── TIMELINE ────────────────────────────────────────── */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .month-group { margin-bottom: 2rem; }
-
-    .month-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .month-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .exams-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 0.75rem;
-    }
-
-    /* ── EXAM CARD ───────────────────────────────────────── */
-    .exam-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.1rem 1.3rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      transition: border-color 0.15s, transform 0.15s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .exam-card:hover {
-      border-color: #3a3f5c;
-      transform: translateY(-1px);
-    }
-
-    .exam-card.past {
-      opacity: 0.45;
-    }
-
-    .exam-card.today {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 4px 24px rgba(79,127,255,0.15);
-    }
-
-    .exam-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      border-radius: 14px 0 0 14px;
-    }
-
-    .exam-card[data-subject="sv"]::before  { background: var(--sv); }
-    .exam-card[data-subject="en"]::before  { background: var(--en); }
-    .exam-card[data-subject="ma"]::before  { background: var(--ma); }
-    .exam-card[data-subject="no"]::before  { background: var(--no); }
-    .exam-card[data-subject="so"]::before  { background: var(--so); }
-
-    .date-col {
-      text-align: center;
-      min-width: 48px;
-    }
-
-    .date-day {
-      font-size: 1.8rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .date-month {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .date-weekday {
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-
-    .card-body { flex: 1; }
-
-    .card-subject-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.15rem 0.55rem;
-      border-radius: 100px;
-      margin-bottom: 0.4rem;
-    }
-
-    [data-subject="sv"] .card-subject-badge { background: rgba(79,127,255,0.15); color: var(--sv); }
-    [data-subject="en"] .card-subject-badge { background: rgba(62,207,142,0.15); color: var(--en); }
-    [data-subject="ma"] .card-subject-badge { background: rgba(255,107,107,0.15); color: var(--ma); }
-    [data-subject="no"] .card-subject-badge { background: rgba(255,209,102,0.15); color: var(--yellow); }
-    [data-subject="so"] .card-subject-badge { background: rgba(167,139,250,0.15); color: var(--so); }
-
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .card-meta span {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .today-badge {
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 100px;
-      margin-left: auto;
-      align-self: flex-start;
-    }
-
-    /* ── INFO SECTION ────────────────────────────────────── */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-      margin-top: 3rem;
-    }
-
-    .info-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.4rem;
-    }
-
-    .info-card h3 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .info-card p, .info-card li {
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-size: 15px;
       line-height: 1.65;
     }
 
-    .info-card ul {
-      padding-left: 1.2rem;
+    a { color: var(--accent); }
+
+    /* ── HEADER ──────────────────────────────────── */
+    header {
+      background: #12152a;
+      border-bottom: 1px solid var(--border);
+      padding: 1.6rem 1.5rem;
+    }
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: .8rem; }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--accent), #7c5cff);
+      border-radius: 12px;
+      display: grid; place-items: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em; }
+    h1 span { color: var(--muted); font-size: .85rem; font-weight: 400; display: block; }
+
+    .next-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: .45rem 1rem;
+      font-size: .82rem;
+      color: var(--muted);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .next-pill strong { color: var(--text); }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #3ecf8e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+    /* ── MAIN ────────────────────────────────────── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
     }
 
-    .info-icon {
-      width: 28px; height: 28px;
-      border-radius: 8px;
+    /* ── ALERT BOX ───────────────────────────────── */
+    .alert {
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .alert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .05rem; }
+    .alert-body h3 { font-size: .95rem; font-weight: 700; margin-bottom: .3rem; }
+    .alert-body p  { font-size: .85rem; line-height: 1.6; }
+    .alert-body p + p { margin-top: .4rem; }
+
+    .alert-info {
+      background: rgba(79,127,255,.1);
+      border: 1px solid rgba(79,127,255,.3);
+    }
+    .alert-info .alert-icon { color: var(--accent); }
+
+    .alert-warning {
+      background: rgba(255,166,60,.08);
+      border: 1px solid rgba(255,166,60,.25);
+    }
+    .alert-warning .alert-icon { color: #ff9a3c; }
+
+    /* ── QUICK OVERVIEW ──────────────────────────── */
+    .section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: .75rem;
+    }
+
+    .date-grid {
       display: grid;
-      place-items: center;
-      font-size: 0.85rem;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .date-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-size: .82rem;
+    }
+    .date-chip.past { opacity: .4; }
+    .date-chip.today { border-color: var(--accent); }
+
+    .chip-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .chip-date { color: var(--muted); white-space: nowrap; min-width: 70px; }
+    .chip-name { font-weight: 600; }
+
+    /* ── SUBJECT SECTION ─────────────────────────── */
+    .subject-section {
+      margin-bottom: 3rem;
+    }
+
+    .subject-header {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .subject-badge {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      display: grid; place-items: center;
+      font-size: 1.2rem;
       flex-shrink: 0;
     }
 
-    .info-icon.blue  { background: rgba(79,127,255,0.15); }
-    .info-icon.green { background: rgba(62,207,142,0.15); }
-    .info-icon.red   { background: rgba(255,107,107,0.15); }
-    .info-icon.yellow{ background: rgba(255,209,102,0.15); }
-
-    /* ── DISCLAIMER ──────────────────────────────────────── */
-    .disclaimer {
-      margin-top: 2.5rem;
-      background: rgba(255,166,60,0.08);
-      border: 1px solid rgba(255,166,60,0.25);
-      border-radius: 12px;
-      padding: 1rem 1.3rem;
-      font-size: 0.82rem;
-      color: var(--orange);
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
+    .subject-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .subject-header h2 span {
+      display: block;
+      font-size: .78rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: .05rem;
     }
 
-    /* ── FOOTER ──────────────────────────────────────────── */
+    /* ── DELPROV CARD ────────────────────────────── */
+    .delprov-list {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .delprov-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .delprov-card.past { opacity: .45; }
+    .delprov-card.done { opacity: .55; }
+
+    .delprov-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.3rem;
+    }
+
+    .delprov-letter {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      display: grid; place-items: center;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .delprov-main { flex: 1; }
+
+    .delprov-title {
+      font-weight: 700;
+      font-size: .97rem;
+      margin-bottom: .2rem;
+    }
+
+    .delprov-subtitle {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    .delprov-date-badge {
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .3rem .75rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+
+    .delprov-details {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .detail-cell {
+      padding: .85rem 1.3rem;
+      border-right: 1px solid var(--border);
+      font-size: .82rem;
+    }
+    .detail-cell:last-child { border-right: none; }
+    .detail-cell:nth-child(3),
+    .detail-cell:nth-child(4) {
+      border-top: 1px solid var(--border);
+    }
+    .detail-cell.full {
+      grid-column: 1 / -1;
+      border-right: none;
+    }
+    .detail-cell.full + .detail-cell { border-top: 1px solid var(--border); }
+
+    .detail-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+    .detail-value { line-height: 1.55; }
+    .detail-value strong { color: var(--text); }
+
+    .tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .1rem .5rem;
+      border-radius: 5px;
+      margin-right: .25rem;
+      margin-bottom: .2rem;
+    }
+    .tag-red   { background: rgba(255,107,107,.15); color: #ff8585; }
+    .tag-green { background: rgba(62,207,142,.15);  color: #3ecf8e; }
+    .tag-blue  { background: rgba(79,127,255,.15);  color: #7aaaff; }
+    .tag-gray  { background: rgba(139,144,176,.12); color: var(--muted); }
+
+    /* ── INFO PANELS ─────────────────────────────── */
+    .info-panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .info-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.3rem;
+    }
+
+    .info-panel h3 {
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: .7rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .info-panel p,
+    .info-panel li {
+      font-size: .83rem;
+      color: #b0b4cc;
+      line-height: 1.65;
+    }
+
+    .info-panel ul {
+      padding-left: 1.2rem;
+    }
+
+    .info-panel li + li { margin-top: .3rem; }
+
+    .info-panel p + p { margin-top: .5rem; }
+
+    /* ── DIVIDER ─────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
       padding: 1.5rem;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: .78rem;
       color: var(--muted);
     }
 
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    /* ── COLOUR UTILS ────────────────────────────── */
+    .sv { color: var(--sv-c); }
+    .en { color: var(--en-c); }
+    .no { color: var(--no-c); }
+    .so { color: var(--so-c); }
+    .ma { color: var(--ma-c); }
 
-    /* ── HIDDEN ──────────────────────────────────────────── */
-    .hidden { display: none !important; }
+    .bg-sv { background: rgba(79,127,255,.15); }
+    .bg-en { background: rgba(62,207,142,.15); }
+    .bg-no { background: rgba(255,209,102,.15); }
+    .bg-so { background: rgba(167,139,250,.15); }
+    .bg-ma { background: rgba(255,107,107,.15); }
 
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 600px) {
-      h1 { font-size: 1.1rem; }
-      .exams-grid { grid-template-columns: 1fr; }
+    .border-sv { border-left: 3px solid var(--sv-c); }
+    .border-en { border-left: 3px solid var(--en-c); }
+    .border-no { border-left: 3px solid var(--no-c); }
+    .border-so { border-left: 3px solid var(--so-c); }
+    .border-ma { border-left: 3px solid var(--ma-c); }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 580px) {
+      .delprov-details { grid-template-columns: 1fr; }
+      .detail-cell { border-right: none !important; }
+      .detail-cell:nth-child(2) { border-top: 1px solid var(--border); }
     }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="header-top">
-      <div class="logo">
-        <div class="logo-icon">📋</div>
-        <h1>
-          Nationella Prov
-          <span>Årskurs 9 · VT 2026</span>
-        </h1>
-      </div>
-      <div class="next-exam-pill">
-        <div class="dot"></div>
-        Nästa prov: <strong id="next-exam-label">–</strong>
-      </div>
+    <div class="logo">
+      <div class="logo-icon">📋</div>
+      <h1>Nationella Prov<span>Årskurs 9 · VT 2026</span></h1>
     </div>
-
-    <div class="countdown-bar" id="countdown-bar"></div>
+    <div class="next-pill">
+      <div class="dot"></div>
+      Nästa prov: <strong id="next-label">–</strong>
+    </div>
   </div>
 </header>
 
 <main>
 
-  <!-- FILTERS -->
-  <p class="section-title">Filtrera efter ämne</p>
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">Alla ämnen</button>
-    <button class="filter-btn" data-filter="sv">Svenska</button>
-    <button class="filter-btn" data-filter="en">Engelska</button>
-    <button class="filter-btn" data-filter="ma">Matematik</button>
-    <button class="filter-btn" data-filter="no">NO-ämnen</button>
-    <button class="filter-btn" data-filter="so">SO-ämnen</button>
-  </div>
-
-  <!-- TIMELINE -->
-  <div class="timeline" id="timeline"></div>
-
-  <!-- INFO BOXES -->
-  <div class="info-grid">
-    <div class="info-card">
-      <h3><div class="info-icon blue">🗣️</div> Muntliga prov – HT 2025</h3>
-      <p>Delprov A i <strong>svenska / svenska som andraspråk</strong> och <strong>engelska</strong> genomfördes under höstterminen 2025 (3 nov – 5 dec). Dessa prov ingår i det totala provbetyget – tala med din lärare om du missade dem.</p>
-    </div>
-    <div class="info-card">
-      <h3><div class="info-icon yellow">🔬</div> NO och SO – ett ämne per skola</h3>
-      <ul>
-        <li>Varje skola tilldelas <strong>ett</strong> NO-ämne (biologi, fysik <em>eller</em> kemi)</li>
-        <li>Varje skola tilldelas <strong>ett</strong> SO-ämne (geografi, historia, religion <em>eller</em> samhällskunskap)</li>
-        <li>NO: Skolverket meddelar ca <strong>1 april 2026</strong> (3 v. före prov)</li>
-        <li>SO: Skolverket meddelar ca <strong>30 mars 2026</strong></li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3><div class="info-icon blue">🤒</div> Sjukdom på provdagen?</h3>
-      <p>Meddela skolan så tidigt som möjligt. Du har rätt att genomföra provet vid ett senare tillfälle. Betyget påverkas inte negativt av ett uppskjutet prov – tala med din lärare.</p>
-    </div>
-    <div class="info-card">
-      <h3><div class="info-icon green">📊</div> Hur påverkar NP betyget?</h3>
-      <p>Nationella proven är ett stöd för likvärdig bedömning. De är <em>inte</em> betygsgrundande i sig, men läraren ska ta hänsyn till dem vid betygssättning. Skiljer sig provbetyget mycket från kursbetyget krävs dokumentation.</p>
-    </div>
-    <div class="info-card">
-      <h3><div class="info-icon red">🔒</div> Sekretess och fusk</h3>
-      <ul>
-        <li>Provinnehållet är sekretessbelagt – du får <strong>inte</strong> berätta om uppgifterna.</li>
-        <li>Otillåtna hjälpmedel eller kommunikation under prov kan leda till underkänt.</li>
-        <li>Proven återanvänds t.o.m. 30 juni 2032.</li>
-        <li>Överträdelse anmäls till rektor.</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h3><div class="info-icon yellow">📚</div> Hjälpmedel – vad gäller?</h3>
-      <ul>
-        <li><strong>Matematik A:</strong> Utan miniräknare (40 min)</li>
-        <li><strong>Matematik B, C, D:</strong> Med miniräknare</li>
-        <li><strong>Engelska / Svenska:</strong> Inga hjälpmedel</li>
-        <li><strong>NO / SO:</strong> Se respektive provhäfte</li>
-        <li>VT 2026: Alla prov genomförs på <strong>papper</strong> (ej digitalt)</li>
-      </ul>
+  <!-- FAKTARUTA: DIGITALT STÄLLT IN -->
+  <div class="alert alert-info">
+    <div class="alert-icon">ℹ️</div>
+    <div class="alert-body">
+      <h3>Digitala prov genomförs inte VT 2026</h3>
+      <p>Skolverket beslutade att nationella prov i grundskolan <strong>inte</strong> ska genomföras digitalt under vårterminen 2026. Alla prov skrivs på <strong>papper</strong>, precis som tidigare år. De digitala proven planerades ursprungligen vara obligatoriska från hösten 2025, men projektet försenades och papper gäller tills vidare.</p>
     </div>
   </div>
 
-  <!-- DISCLAIMER -->
-  <div class="disclaimer">
-    <span style="font-size:1rem;flex-shrink:0">⚠️</span>
-    <div>
-      <strong>Datumen är verifierade</strong> mot Skolverkets föreskrifter (SKOLFS 2025:1–2), Uppsala universitets och Umeå universitets officiella provinfo. Alla fasta provdatum börjar kl 09:00.
-      Om rektor beslutar om senareläggning gäller det hela skolenheten.
-      Kontrollera alltid med din skola och <a href="https://www.skolverket.se/prov-och-bedomning/nationella-prov/provdatum" style="color:inherit;text-decoration:underline">skolverket.se/provdatum</a> för det senaste.
+  <!-- SNABBÖVERSIKT -->
+  <p class="section-label">Alla provdatum – snabböversikt</p>
+  <div class="date-grid" id="date-grid"></div>
+
+  <!-- ── SVENSKA / SVENSKA SOM ANDRASPRÅK ── -->
+  <div class="subject-section">
+    <div class="subject-header">
+      <div class="subject-badge bg-sv" style="color:var(--sv-c)">🇸🇪</div>
+      <h2>Svenska / Svenska som andraspråk
+        <span>Delprov B: 11 mars · Delprov C: 13 mars</span>
+      </h2>
     </div>
+
+    <div class="delprov-list">
+
+      <!-- Delprov A -->
+      <div class="delprov-card done border-sv">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-sv sv">A</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov A – Muntlig kommunikation</div>
+            <div class="delprov-subtitle">Genomfördes under HT 2025 · 3 november – 5 december</div>
+          </div>
+          <div class="delprov-date-badge bg-sv sv">Klart ✓</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Förmågan att tala, lyssna och kommunicera på svenska. Elever håller tal, berättar, diskuterar eller deltar i samtal – ofta med förberedelsetid.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel & regler</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förberedelsematerial tillåtet</span>
+              <span class="tag tag-gray">Betygspoäng ingår i slutbedömningen</span>
+            </div>
+          </div>
+          <div class="detail-cell full">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">Det muntliga provet påverkas normalt inte av dyslexi. Förlängd förberedelsetid kan beviljas av rektor vid behov.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov B -->
+      <div class="delprov-card border-sv" id="card-sv-b">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-sv sv">B</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov B – Läsförståelse</div>
+            <div class="delprov-subtitle">Onsdag 11 mars 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-sv sv">11 mars</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Förmågan att läsa och förstå texter av olika slag – skönlitteratur, faktatexter och tidningstexter. Elever svarar på frågor om innehåll, tolkning och språklig form.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value">Ca <strong>80 minuter</strong>. Svaren skrivs direkt i provhäftet. Flervalsfrågor och kortsvar.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value"><span class="tag tag-red">Inga hjälpmedel</span></div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-red">Uppläsning av texterna ej tillåten</span>
+              <div style="margin-top:.4rem">Eftersom provet mäter just läsförmågan får provtexterna inte läsas upp för eleven – det skulle ändra vad provet mäter. Rektor beslutar om eventuell tidsförlängning.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov C -->
+      <div class="delprov-card border-sv" id="card-sv-c">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-sv sv">C</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov C – Skrivuppgift</div>
+            <div class="delprov-subtitle">Fredag 13 mars 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-sv sv">13 mars</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Förmågan att skriva en sammanhängande text med ett tydligt syfte – t.ex. en berättelse, krönika, argumenterande text eller kåseri. Bedöms på innehåll, struktur, språk och stil.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value">Ca <strong>80 minuter</strong>. Elever väljer bland ett antal uppgifter och skriver sin text.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value"><span class="tag tag-red">Inga hjälpmedel</span></div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-green">Talsyntes för egna texter kan tillåtas</span>
+              <div style="margin-top:.4rem">Att lyssna på sin egen text med talsyntes (t.ex. för att kontrollera stavning) kan tillåtas. Det är rektor som beslutar om anpassningar – ingen formell diagnos krävs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ENGELSKA ── -->
+  <div class="subject-section">
+    <div class="subject-header">
+      <div class="subject-badge bg-en" style="color:var(--en-c)">🇬🇧</div>
+      <h2>Engelska
+        <span>Delprov B: 24 mars · Delprov C: 26 mars</span>
+      </h2>
+    </div>
+
+    <div class="delprov-list">
+
+      <!-- Delprov A -->
+      <div class="delprov-card done border-en">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-en en">A</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov A – Muntlig kommunikation</div>
+            <div class="delprov-subtitle">Genomfördes under HT 2025 · 3 november – 5 december</div>
+          </div>
+          <div class="delprov-date-badge bg-en en">Klart ✓</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Muntlig produktion och interaktion på engelska. Genomförs parvis – elever samtalar, diskuterar och löser uppgifter tillsammans på engelska.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel & regler</div>
+            <div class="detail-value"><span class="tag tag-gray">Inga hjälpmedel</span><span class="tag tag-gray">Betygspoäng ingår</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov B -->
+      <div class="delprov-card border-en" id="card-en-b">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-en en">B</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov B – Läs- och hörförståelse</div>
+            <div class="delprov-subtitle">Tisdag 24 mars 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-en en">24 mars</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Receptiv förmåga i engelska: läsförståelse och hörförståelse. Elever lyssnar på inspelade texter (radioprogram, samtal, intervjuer) och läser engelska texter, och svarar sedan på frågor.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value">Ca <strong>80 minuter</strong>. Flervalsfrågor och kortsvar. Hörförståelsen spelas upp för hela klassen samtidigt.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value"><span class="tag tag-red">Inga hjälpmedel</span></div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-red">Uppläsning av lästexter ej tillåten</span>
+              <div style="margin-top:.4rem">Hörförståelsen spelas upp för alla elever och kan inte individuellt anpassas. För lästexterna gäller samma princip som i svenska – uppläsning ändrar vad provet mäter.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov C -->
+      <div class="delprov-card border-en" id="card-en-c">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-en en">C</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov C – Skriftlig produktion</div>
+            <div class="delprov-subtitle">Torsdag 26 mars 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-en en">26 mars</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Förmågan att skriva på engelska med ett tydligt syfte och en tydlig mottagare – t.ex. ett brev, en berättelse, en artikel eller ett mail. Bedöms på kommunikation, språkriktighet och ordförråd.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value">Ca <strong>60 minuter</strong>. Elever väljer bland uppgiftsalternativ och skriver sin text på engelska.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value"><span class="tag tag-red">Inga hjälpmedel</span><div style="margin-top:.4rem;color:var(--muted)">Varken ordbok, lexikon eller digital stavningskontroll är tillåten.</div></div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <div style="margin-top:.4rem">Rektor beslutar om anpassningar. Ingen formell diagnos krävs för att ansöka.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── NO ── -->
+  <div class="subject-section">
+    <div class="subject-header">
+      <div class="subject-badge bg-no" style="color:var(--no-c)">🔬</div>
+      <h2>NO – Biologi, Fysik eller Kemi
+        <span>Delprov A + B: 22 april · kl 09:00</span>
+      </h2>
+    </div>
+
+    <div class="alert alert-info" style="margin-bottom:1rem">
+      <div class="alert-icon" style="font-size:1rem">📌</div>
+      <div class="alert-body">
+        <p><strong>Varje skola tilldelas ett ämne</strong> – antingen biologi, fysik eller kemi. Skolverket meddelar vilket ämne ungefär <strong>tre veckor innan provdagen</strong>, dvs. runt 1 april 2026. Elever vet alltså inte i förväg vilket av de tre ämnena som gäller för deras skola.</p>
+      </div>
+    </div>
+
+    <div class="delprov-list">
+
+      <div class="delprov-card border-no" id="card-no">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-no no">A+B</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov A och B – Skriftligt prov</div>
+            <div class="delprov-subtitle">Onsdag 22 april 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-no no">22 april</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Kunskaper och förmågor i det tilldelade NO-ämnet (bi, fy eller ke). Provet täcker kursplanens mål för åk 7–9 och testar förståelse av begrepp, förmåga att tolka data och dra slutsatser, samt att tillämpa naturvetenskapliga modeller.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value"><strong>90 minuter + lunchrast + 90 minuter</strong>. Delprov A och B genomförs samma dag med en längre paus emellan. Svaren skrivs i provhäftet.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value">Framgår av provhäftet. Beroende på ämne kan periodiska systemet eller formler bifogas provmaterialet. Kontrollera med din lärare.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <div style="margin-top:.4rem">Rektor beslutar om anpassningar. Eftersom provet inte primärt mäter läsförmåga kan uppläsning av uppgifter i vissa fall beviljas – men ska inte ändra vad provet mäter.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SO ── -->
+  <div class="subject-section">
+    <div class="subject-header">
+      <div class="subject-badge bg-so" style="color:var(--so-c)">🌍</div>
+      <h2>SO – Geografi, Historia, Religion eller Samhällskunskap
+        <span>Delprov A: 5 maj · Delprov B: 7 maj</span>
+      </h2>
+    </div>
+
+    <div class="alert alert-info" style="margin-bottom:1rem">
+      <div class="alert-icon" style="font-size:1rem">📌</div>
+      <div class="alert-body">
+        <p><strong>Varje skola tilldelas ett ämne</strong> – antingen geografi, historia, religionskunskap eller samhällskunskap. Skolverket meddelar vilket ämne runt <strong>30 mars 2026</strong>, ca fem veckor innan provdagen. Elever vet alltså inte vilket SO-ämne som gäller förrän dess.</p>
+      </div>
+    </div>
+
+    <div class="delprov-list">
+
+      <!-- Delprov A -->
+      <div class="delprov-card border-so" id="card-so-a">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-so so">A</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov A – Skriftligt prov</div>
+            <div class="delprov-subtitle">Tisdag 5 maj 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-so so">5 maj</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Kunskaper och förmågor i det tilldelade SO-ämnet. Provet täcker kursplanens mål för åk 7–9 och testar fakta, analys, källkritik och resonemang.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value">Ca <strong>90 minuter</strong>. Svaren skrivs i provhäftet. Kombinationer av flerval, kortsvar och längre resonemang.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value">Framgår av provhäftet. I geografi kan t.ex. karta ingå i provmaterialet. Kontrollera med din lärare.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <div style="margin-top:.4rem">Rektor beslutar. Anpassningar får inte ändra vad provet är avsett att mäta.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov B -->
+      <div class="delprov-card border-so" id="card-so-b">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-so so">B</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov B – Skriftligt prov</div>
+            <div class="delprov-subtitle">Torsdag 7 maj 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-so so">7 maj</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Fortsätter bedömningen i det tilldelade SO-ämnet. Ofta med fokus på längre skriftliga resonemang, analys av källmaterial och förmågan att argumentera och dra slutsatser.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value">Ca <strong>90 minuter</strong>. Svaren skrivs i provhäftet.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value">Framgår av provhäftet. Kontrollera med din lärare.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <div style="margin-top:.4rem">Rektor beslutar. Ingen formell diagnos krävs för att ansöka om anpassning.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── MATEMATIK ── -->
+  <div class="subject-section">
+    <div class="subject-header">
+      <div class="subject-badge bg-ma" style="color:var(--ma-c)">📐</div>
+      <h2>Matematik
+        <span>Delprov A + B: 11 maj · Delprov C + D: 13 maj</span>
+      </h2>
+    </div>
+
+    <div class="delprov-list">
+
+      <!-- Delprov A -->
+      <div class="delprov-card border-ma" id="card-ma-ab">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-ma ma">A</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov A – Kortsvarsuppgifter utan hjälpmedel</div>
+            <div class="delprov-subtitle">Måndag 11 maj 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-ma ma">11 maj</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Grundläggande beräkningsförmåga utan stöd av hjälpmedel. Algebra, aritmetik, geometri, procent och statistik. Flervalsfrågor och kortsvar skrivs direkt i häftet.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value"><strong>40 minuter</strong>. Svaren skrivs i provhäftet. Direkt efter A påbörjas delprov B samma dag.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value"><span class="tag tag-red">Ingen miniräknare</span><span class="tag tag-red">Inget formelblad</span></div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-green">Uppläsning av uppgifter kan tillåtas</span>
+              <div style="margin-top:.4rem">Matematik testar inte läsförmåga, varför uppläsning av uppgiftstexter kan beviljas utan att det ändrar vad provet mäter.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov B -->
+      <div class="delprov-card border-ma">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-ma ma">B</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov B – Fullständiga lösningar med hjälpmedel</div>
+            <div class="delprov-subtitle">Måndag 11 maj 2026 · direkt efter Delprov A</div>
+          </div>
+          <div class="delprov-date-badge bg-ma ma">11 maj</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Mer komplexa beräkningar och problemlösning. Elever ska redovisa fullständiga lösningar på separat papper – rätt svar utan visad uträkning ger inte full poäng. Testar matematiskt resonemang och kommunikation.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value"><strong>80 minuter</strong>. Fullständiga lösningar skrivs på separat skrivpapper.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Miniräknare tillåten</span>
+              <span class="tag tag-green">Formelblad från Skolverket delas ut</span>
+              <div style="margin-top:.4rem;color:var(--muted)">Skolverkets officiella formelblad delas ut av läraren. Inga egna anteckningslappar.</div>
+            </div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-green">Uppläsning av uppgifter kan tillåtas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov C -->
+      <div class="delprov-card border-ma" id="card-ma-cd">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-ma ma">C</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov C – Kortsvarsuppgifter med hjälpmedel</div>
+            <div class="delprov-subtitle">Onsdag 13 maj 2026 · kl 09:00</div>
+          </div>
+          <div class="delprov-date-badge bg-ma ma">13 maj</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Liknande innehåll som delprov A, men nu med tillgång till miniräknare och formelblad. Flerval och kortsvar som kräver noggranna beräkningar.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value"><strong>40 minuter</strong>. Svaren skrivs i provhäftet. Direkt efter C påbörjas delprov D.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Miniräknare tillåten</span>
+              <span class="tag tag-green">Formelblad från Skolverket</span>
+            </div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-green">Uppläsning av uppgifter kan tillåtas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delprov D -->
+      <div class="delprov-card border-ma">
+        <div class="delprov-top">
+          <div class="delprov-letter bg-ma ma">D</div>
+          <div class="delprov-main">
+            <div class="delprov-title">Delprov D – Fullständiga lösningar med hjälpmedel</div>
+            <div class="delprov-subtitle">Onsdag 13 maj 2026 · direkt efter Delprov C</div>
+          </div>
+          <div class="delprov-date-badge bg-ma ma">13 maj</div>
+        </div>
+        <div class="delprov-details">
+          <div class="detail-cell">
+            <div class="detail-label">Vad prövas</div>
+            <div class="detail-value">Avancerad problemlösning med hjälpmedel. Kräver fullständigt redovisade lösningar – metod och resonemang är lika viktigt som rätt svar. Täcker hela kursplanen i matematik för åk 7–9 (Lgr22).</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Tid & format</div>
+            <div class="detail-value"><strong>80 minuter</strong>. Fullständiga lösningar skrivs på separat skrivpapper.</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Hjälpmedel</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Miniräknare tillåten</span>
+              <span class="tag tag-green">Formelblad från Skolverket</span>
+            </div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Dyslexi / läs- och skrivsvårigheter</div>
+            <div class="detail-value">
+              <span class="tag tag-green">Förlängd tid kan beviljas</span>
+              <span class="tag tag-green">Uppläsning av uppgifter kan tillåtas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FAKTARUTOR ── -->
+  <div class="section-divider"></div>
+  <p class="section-label">Viktigt att veta</p>
+  <div class="info-panels">
+
+    <div class="info-panel">
+      <h3>📊 NP och ditt betyg</h3>
+      <p>Läraren <strong>ska särskilt beakta</strong> ditt resultat på nationella proven när betyget sätts (Skollagen 10 kap. 22 §). NP är den enskilt viktigaste bedömningen – men inte den enda. All annan kunskap läraren observerat under terminen väger också in.</p>
+      <p>Eftersom NP sker i slutet av tre års studier väger det extra tungt – läraren måste ta hänsyn till allt den vet om dig när betyget sätts. I praktiken är det ovanligt att en lärare sätter ett lägre betyg än det du fick på NP. NP är alltså en reell chans att höja sitt betyg.</p>
+    </div>
+
+    <div class="info-panel">
+      <h3>🤒 Sjuk på provdagen?</h3>
+      <p>Sjukdom räknas som ett <strong>särskilt skäl</strong> och rektor kan besluta att flytta provet för dig till ett senare tillfälle. Meddela skolan så tidigt som möjligt – helst redan på morgonen.</p>
+      <p>Ersättningsprov finns men är <strong>inte</strong> avsedda för sjuka elever – de används bara om det ordinarie provet av tekniska skäl inte kan genomföras. Det är alltså rektor som avgör om du får göra om provet, och det är normalt möjligt vid sjukdom.</p>
+    </div>
+
+    <div class="info-panel">
+      <h3>🔒 Sekretess</h3>
+      <p>Proven är <strong>sekretessbelagda</strong> enligt offentlighets- och sekretesslagen (17 kap. 3 c §). Du får inte berätta om provets innehåll för någon – varken under eller efter provdagen. Proven för läsåret 2025/26 återanvänds av Skolverket till och med 30 juni 2032.</p>
+      <p>Brott mot sekretessen anmäls till rektor. Om det ordinarie provet bedöms ha blivit känt i förväg kan rektor besluta att använda ersättningsprov.</p>
+    </div>
+
+    <div class="info-panel">
+      <h3>♿ Anpassningar – regler</h3>
+      <ul>
+        <li><strong>Rektor beslutar</strong> om alla anpassningar.</li>
+        <li><strong>Ingen formell diagnos krävs</strong> – behovet bedöms individuellt.</li>
+        <li>Vanliga anpassningar: förlängd tid, fler pauser, förstorad text, eget rum.</li>
+        <li>Anpassningar får <strong>inte</strong> ändra vad provet mäter – t.ex. kan lästexter inte läsas upp vid läsförståelseprov.</li>
+        <li>Uppläsning av uppgifter är däremot ofta möjligt i matematik och NO/SO.</li>
+      </ul>
+    </div>
+
   </div>
 
 </main>
 
 <footer>
-  Källa: <a href="https://www.skolverket.se">Skolverket</a> · Nationella prov åk 9 VT 2026 · Sidan är informativ och inte officiell
+  Källa: <a href="https://www.skolverket.se/prov-och-bedomning/nationella-prov">Skolverket</a> ·
+  <a href="https://www.uu.se/nationella-prov/svenska-och-svenska-som-andrasprak/grundskolan/ak9">Uppsala universitet (Svenska)</a> ·
+  <a href="https://www.umu.se/institutionen-for-tillampad-utbildningsvetenskap/np/no9/provdatum/">Umeå universitet (NO)</a> ·
+  SKOLFS 2025:1–2 · Sidan är informativ och inte officiell
 </footer>
 
 <script>
-  // ── DATA ─────────────────────────────────────────────────
-  // Datum verifierade mot Skolverket, Uppsala univ., Umeå univ. och kommunala skolor.
-  // Källa: SKOLFS 2025:1–2. Alla fasta provdatum börjar kl 09:00.
-  // OBS: Proven genomförs på papper VT 2026 (ej digitalt).
-  // NO/SO: Varje skola tilldelas ETT ämne – Skolverket meddelar vilket.
-  const exams = [
-    // MARS – Svenska / Svenska som andraspråk
-    { date: '2026-03-11', subject: 'sv',  label: 'sv',  title: 'Svenska / Sva – Delprov B',        duration: 'ca 80 min',   type: 'Läsförståelse',           aids: 'Inga hjälpmedel' },
-    { date: '2026-03-13', subject: 'sv',  label: 'sv',  title: 'Svenska / Sva – Delprov C',        duration: 'ca 80 min',   type: 'Skrivuppgift',            aids: 'Inga hjälpmedel' },
-
-    // MARS – Engelska
-    { date: '2026-03-24', subject: 'en',  label: 'en',  title: 'Engelska – Delprov B',             duration: 'ca 80 min',   type: 'Läs- & hörförståelse',    aids: 'Inga hjälpmedel' },
-    { date: '2026-03-26', subject: 'en',  label: 'en',  title: 'Engelska – Delprov C',             duration: 'ca 60 min',   type: 'Skriftlig produktion',    aids: 'Inga hjälpmedel' },
-
-    // APRIL – NO (skolan tilldelas ett av ämnena: Bi, Fy eller Ke)
-    { date: '2026-04-22', subject: 'no',  label: 'no',  title: 'NO – Delprov A + B (Bi / Fy / Ke)', duration: '90 + 90 min', type: 'Skriftligt (2 delar)',    aids: 'Se provhäfte' },
-
-    // MAJ – SO (skolan tilldelas ett av ämnena: Ge, Hi, Re eller Sh)
-    { date: '2026-05-05', subject: 'so',  label: 'so',  title: 'SO – Delprov A (Ge / Hi / Re / Sh)', duration: 'ca 90 min',  type: 'Skriftligt',              aids: 'Se provhäfte' },
-    { date: '2026-05-07', subject: 'so',  label: 'so',  title: 'SO – Delprov B (Ge / Hi / Re / Sh)', duration: 'ca 90 min',  type: 'Skriftligt',              aids: 'Se provhäfte' },
-
-    // MAJ – Matematik
-    { date: '2026-05-11', subject: 'ma',  label: 'ma',  title: 'Matematik – Delprov A + B',        duration: '40 + 80 min', type: 'Skriftligt (2 delar)',    aids: 'A: utan, B: med miniräknare' },
-    { date: '2026-05-13', subject: 'ma',  label: 'ma',  title: 'Matematik – Delprov C + D',        duration: '40 + 80 min', type: 'Skriftligt (2 delar)',    aids: 'C+D: med miniräknare' },
-  ];
-
-  const subjectNames = {
-    sv: 'Svenska / Sva', en: 'Engelska',
-    ma: 'Matematik', no: 'NO (Bi / Fy / Ke)',
-    so: 'SO (Ge / Hi / Re / Sh)'
-  };
-
-  const weekdays = ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'];
-  const monthNames = ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
-
   const today = new Date();
   today.setHours(0,0,0,0);
 
-  function parseDate(str) {
-    const [y,m,d] = str.split('-').map(Number);
+  const allDates = [
+    { date:'2025-11-03', label:'Sv/Sva & En – Delprov A (muntligt, start HT)',  color:'#4f7fff' },
+    { date:'2026-03-11', label:'Svenska/Sva – Delprov B (läsförståelse)',        color:'#4f7fff' },
+    { date:'2026-03-13', label:'Svenska/Sva – Delprov C (skrivuppgift)',         color:'#4f7fff' },
+    { date:'2026-03-24', label:'Engelska – Delprov B (läs- & hörförståelse)',    color:'#3ecf8e' },
+    { date:'2026-03-26', label:'Engelska – Delprov C (skriftlig produktion)',    color:'#3ecf8e' },
+    { date:'2026-04-22', label:'NO – Delprov A + B (Bi / Fy / Ke)',             color:'#ffd166' },
+    { date:'2026-05-05', label:'SO – Delprov A (Ge / Hi / Re / Sh)',            color:'#a78bfa' },
+    { date:'2026-05-07', label:'SO – Delprov B',                                color:'#a78bfa' },
+    { date:'2026-05-11', label:'Matematik – Delprov A + B',                     color:'#ff6b6b' },
+    { date:'2026-05-13', label:'Matematik – Delprov C + D',                     color:'#ff6b6b' },
+  ];
+
+  const months = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+
+  function parseDate(s) {
+    const [y,m,d] = s.split('-').map(Number);
     return new Date(y, m-1, d);
   }
 
-  function diffDays(d) {
-    return Math.round((d - today) / 86400000);
-  }
-
-  // ── BUILD COUNTDOWN BAR ────────────────────────────────
-  function buildCountdown() {
-    const bar = document.getElementById('countdown-bar');
-    const nextLabel = document.getElementById('next-exam-label');
-
-    const upcoming = exams
-      .map(e => ({ ...e, d: parseDate(e.date), diff: diffDays(parseDate(e.date)) }))
-      .filter(e => e.diff >= 0)
-      .sort((a, b) => a.diff - b.diff)
-      .slice(0, 6);
-
-    if (upcoming.length === 0) {
-      nextLabel.textContent = 'Alla prov klara!';
-      bar.innerHTML = '<div class="countdown-card"><div class="label">Status</div><div class="subject">Alla prov genomförda 🎉</div></div>';
-      return;
-    }
-
-    nextLabel.textContent = upcoming[0].title.split('–')[0].trim() + ' · ' + upcoming[0].d.toLocaleDateString('sv-SE', { day:'numeric', month:'short' });
-
-    upcoming.forEach(e => {
-      const card = document.createElement('div');
-      card.className = 'countdown-card';
-      const daysText = e.diff === 0 ? '<span>idag</span>' : `${e.diff} <span>dag${e.diff !== 1 ? 'ar' : ''}</span>`;
-      card.innerHTML = `
-        <div class="label">${e.d.toLocaleDateString('sv-SE', { day:'numeric', month:'short' })}</div>
-        <div class="subject">${e.title.split('–')[1]?.trim() || e.title}</div>
-        <div class="days">${daysText}</div>
-      `;
-      bar.appendChild(card);
-    });
-  }
-
-  // ── BUILD TIMELINE ─────────────────────────────────────
-  function buildTimeline(filter = 'all') {
-    const timeline = document.getElementById('timeline');
-    timeline.innerHTML = '';
-
-    const groups = {};
-    exams.forEach(e => {
-      if (filter !== 'all' && e.label !== filter) return;
-      const d = parseDate(e.date);
-      const key = `${d.getFullYear()}-${d.getMonth()}`;
-      if (!groups[key]) groups[key] = { month: d.getMonth(), year: d.getFullYear(), items: [] };
-      groups[key].items.push({ ...e, d });
-    });
-
-    Object.values(groups).sort((a,b) => a.year !== b.year ? a.year-b.year : a.month-b.month).forEach(g => {
-      const group = document.createElement('div');
-      group.className = 'month-group';
-
-      const label = document.createElement('div');
-      label.className = 'month-label';
-      label.textContent = monthNames[g.month] + ' ' + g.year;
-      group.appendChild(label);
-
-      const grid = document.createElement('div');
-      grid.className = 'exams-grid';
-
-      g.items.sort((a,b) => a.d - b.d).forEach(e => {
-        const diff = diffDays(e.d);
-        const card = document.createElement('div');
-        card.className = 'exam-card' + (diff < 0 ? ' past' : diff === 0 ? ' today' : '');
-        card.dataset.subject = e.subject;
-
-        card.innerHTML = `
-          <div class="date-col">
-            <div class="date-day">${e.d.getDate()}</div>
-            <div class="date-month">${monthNames[e.d.getMonth()].slice(0,3)}</div>
-            <div class="date-weekday">${weekdays[e.d.getDay()]}</div>
-          </div>
-          <div class="card-body">
-            <div class="card-subject-badge">${subjectNames[e.subject]}</div>
-            <div class="card-title">${e.title}</div>
-            <div class="card-meta">
-              <span>⏱ ${e.duration}</span>
-              <span>📝 ${e.type}</span>
-              <span>🔧 ${e.aids}</span>
-            </div>
-          </div>
-          ${diff === 0 ? '<div class="today-badge">Idag</div>' : ''}
-        `;
-        grid.appendChild(card);
-      });
-
-      group.appendChild(grid);
-      timeline.appendChild(group);
-    });
-
-    if (timeline.innerHTML === '') {
-      timeline.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem">Inga prov matchar filtret.</p>';
-    }
-  }
-
-  // ── FILTER BUTTONS ─────────────────────────────────────
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      buildTimeline(btn.dataset.filter);
-    });
+  // Build quick grid
+  const grid = document.getElementById('date-grid');
+  allDates.forEach(e => {
+    const d = parseDate(e.date);
+    const diff = Math.round((d - today) / 86400000);
+    const chip = document.createElement('div');
+    chip.className = 'date-chip' + (diff < 0 ? ' past' : diff === 0 ? ' today' : '');
+    chip.innerHTML = `
+      <div class="chip-dot" style="background:${e.color}"></div>
+      <span class="chip-date">${d.getDate()} ${months[d.getMonth()]}${diff === 0 ? ' 🔴' : ''}</span>
+      <span class="chip-name">${e.label}</span>
+    `;
+    grid.appendChild(chip);
   });
 
-  // ── INIT ───────────────────────────────────────────────
-  buildCountdown();
-  buildTimeline();
+  // Next exam label
+  const upcoming = allDates
+    .map(e => ({ ...e, d: parseDate(e.date) }))
+    .filter(e => Math.round((e.d - today)/86400000) >= 0)
+    .sort((a,b) => a.d - b.d);
+
+  if (upcoming.length) {
+    const next = upcoming[0];
+    const diff = Math.round((next.d - today)/86400000);
+    const label = diff === 0 ? 'Idag!' : `${next.d.getDate()} ${months[next.d.getMonth()]} (om ${diff} dag${diff===1?'':'ar'})`;
+    document.getElementById('next-label').textContent = label;
+  } else {
+    document.getElementById('next-label').textContent = 'Alla klara 🎉';
+  }
+
+  // Mark past delprov-cards
+  document.querySelectorAll('.delprov-card:not(.done)').forEach(card => {
+    const subtitle = card.querySelector('.delprov-subtitle')?.textContent || '';
+    const match = subtitle.match(/(\d{1,2})\s+(\w+)\s+2026/);
+    if (match) {
+      const monthMap = {januari:0,februari:1,mars:2,april:3,maj:4,juni:5,juli:6,augusti:7,september:8,oktober:9,november:10,december:11};
+      const d = new Date(2026, monthMap[match[2].toLowerCase()] ?? 0, parseInt(match[1]));
+      if (d < today) card.classList.add('past');
+    }
+  });
 </script>
 </body>
 </html>
