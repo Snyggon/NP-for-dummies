@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nationella Prov – Årskurs 9</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #4f7fff;
+      --accent2: #7c5cff;
+      --text: #e8eaf6;
+      --muted: #8b90b0;
+      --green: #3ecf8e;
+      --red: #ff6b6b;
+      --yellow: #ffd166;
+      --orange: #ff9a3c;
+
+      --sv: #4f7fff;
+      --en: #3ecf8e;
+      --ma: #ff6b6b;
+      --no: #ffd166;
+      --so: #a78bfa;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a1d27 0%, #12152a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 span {
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 0.95rem;
+      display: block;
+    }
+
+    .next-exam-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .next-exam-pill strong {
+      color: var(--text);
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── COUNTDOWN ─────────────────────────────────────── */
+    .countdown-bar {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .countdown-bar::-webkit-scrollbar { display: none; }
+
+    .countdown-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 160px;
+    }
+
+    .countdown-card .label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+
+    .countdown-card .subject {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .countdown-card .days {
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .countdown-card .days span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* ── MAIN ────────────────────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── FILTERS ─────────────────────────────────────────── */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      border-radius: 100px;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .filter-btn[data-filter="sv"].active  { background: var(--sv); border-color: var(--sv); }
+    .filter-btn[data-filter="en"].active  { background: var(--en); border-color: var(--en); color: #0a1a0a; }
+    .filter-btn[data-filter="ma"].active  { background: var(--ma); border-color: var(--ma); }
+    .filter-btn[data-filter="no"].active  { background: var(--no); border-color: var(--no); color: #1a1400; }
+    .filter-btn[data-filter="so"].active  { background: var(--so); border-color: var(--so); }
+
+    /* ── TIMELINE ────────────────────────────────────────── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .month-group { margin-bottom: 2rem; }
+
+    .month-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .month-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .exams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 0.75rem;
+    }
+
+    /* ── EXAM CARD ───────────────────────────────────────── */
+    .exam-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.15s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exam-card:hover {
+      border-color: #3a3f5c;
+      transform: translateY(-1px);
+    }
+
+    .exam-card.past {
+      opacity: 0.45;
+    }
+
+    .exam-card.today {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 4px 24px rgba(79,127,255,0.15);
+    }
+
+    .exam-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 14px 0 0 14px;
+    }
+
+    .exam-card[data-subject="sv"]::before  { background: var(--sv); }
+    .exam-card[data-subject="en"]::before  { background: var(--en); }
+    .exam-card[data-subject="ma"]::before  { background: var(--ma); }
+    .exam-card[data-subject="no"]::before  { background: var(--no); }
+    .exam-card[data-subject="so"]::before  { background: var(--so); }
+
+    .date-col {
+      text-align: center;
+      min-width: 48px;
+    }
+
+    .date-day {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .date-month {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .date-weekday {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .card-body { flex: 1; }
+
+    .card-subject-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 100px;
+      margin-bottom: 0.4rem;
+    }
+
+    [data-subject="sv"] .card-subject-badge { background: rgba(79,127,255,0.15); color: var(--sv); }
+    [data-subject="en"] .card-subject-badge { background: rgba(62,207,142,0.15); color: var(--en); }
+    [data-subject="ma"] .card-subject-badge { background: rgba(255,107,107,0.15); color: var(--ma); }
+    [data-subject="no"] .card-subject-badge { background: rgba(255,209,102,0.15); color: var(--yellow); }
+    [data-subject="so"] .card-subject-badge { background: rgba(167,139,250,0.15); color: var(--so); }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .today-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      margin-left: auto;
+      align-self: flex-start;
+    }
+
+    /* ── INFO SECTION ────────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+    }
+
+    .info-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card p, .info-card li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .info-card ul {
+      padding-left: 1.2rem;
+    }
+
+    .info-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .info-icon.blue  { background: rgba(79,127,255,0.15); }
+    .info-icon.green { background: rgba(62,207,142,0.15); }
+    .info-icon.red   { background: rgba(255,107,107,0.15); }
+    .info-icon.yellow{ background: rgba(255,209,102,0.15); }
+
+    /* ── DISCLAIMER ──────────────────────────────────────── */
+    .disclaimer {
+      margin-top: 2.5rem;
+      background: rgba(255,166,60,0.08);
+      border: 1px solid rgba(255,166,60,0.25);
+      border-radius: 12px;
+      padding: 1rem 1.3rem;
+      font-size: 0.82rem;
+      color: var(--orange);
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── HIDDEN ──────────────────────────────────────────── */
+    .hidden { display: none !important; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.1rem; }
+      .exams-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="logo">
+        <div class="logo-icon">📋</div>
+        <h1>
+          Nationella Prov
+          <span>Årskurs 9 · VT 2026</span>
+        </h1>
+      </div>
+      <div class="next-exam-pill">
+        <div class="dot"></div>
+        Nästa prov: <strong id="next-exam-label">–</strong>
+      </div>
+    </div>
+
+    <div class="countdown-bar" id="countdown-bar"></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- FILTERS -->
+  <p class="section-title">Filtrera efter ämne</p>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">Alla ämnen</button>
+    <button class="filter-btn" data-filter="sv">Svenska</button>
+    <button class="filter-btn" data-filter="en">Engelska</button>
+    <button class="filter-btn" data-filter="ma">Matematik</button>
+    <button class="filter-btn" data-filter="no">NO-ämnen</button>
+    <button class="filter-btn" data-filter="so">SO-ämnen</button>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline" id="timeline"></div>
+
+  <!-- INFO BOXES -->
+  <div class="info-grid">
+    <div class="info-card">
+      <h3><div class="info-icon blue">🗣️</div> Muntliga prov – HT 2025</h3>
+      <p>Delprov A i <strong>svenska / svenska som andraspråk</strong> och <strong>engelska</strong> genomfördes under höstterminen 2025 (3 nov – 5 dec). Dessa prov ingår i det totala provbetyget – tala med din lärare om du missade dem.</p>
+    </div>
+    <div class="info-card">
+      <h3><div class="info-icon yellow">🔬</div> NO och SO – ett ämne per skola</h3>
+      <ul>
+        <li>Varje skola tilldelas <strong>ett</strong> NO-ämne (biologi, fysik <em>eller</em> kemi)</li>
+        <li>Varje skola tilldelas <strong>ett</strong> SO-ämne (geografi, historia, religion <em>eller</em> samhällskunskap)</li>
+        <li>NO: Skolverket meddelar ca <strong>1 april 2026</strong> (3 v. före prov)</li>
+        <li>SO: Skolverket meddelar ca <strong>30 mars 2026</strong></li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3><div class="info-icon blue">🤒</div> Sjukdom på provdagen?</h3>
+      <p>Meddela skolan så tidigt som möjligt. Du har rätt att genomföra provet vid ett senare tillfälle. Betyget påverkas inte negativt av ett uppskjutet prov – tala med din lärare.</p>
+    </div>
+    <div class="info-card">
+      <h3><div class="info-icon green">📊</div> Hur påverkar NP betyget?</h3>
+      <p>Nationella proven är ett stöd för likvärdig bedömning. De är <em>inte</em> betygsgrundande i sig, men läraren ska ta hänsyn till dem vid betygssättning. Skiljer sig provbetyget mycket från kursbetyget krävs dokumentation.</p>
+    </div>
+    <div class="info-card">
+      <h3><div class="info-icon red">🔒</div> Sekretess och fusk</h3>
+      <ul>
+        <li>Provinnehållet är sekretessbelagt – du får <strong>inte</strong> berätta om uppgifterna.</li>
+        <li>Otillåtna hjälpmedel eller kommunikation under prov kan leda till underkänt.</li>
+        <li>Proven återanvänds t.o.m. 30 juni 2032.</li>
+        <li>Överträdelse anmäls till rektor.</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3><div class="info-icon yellow">📚</div> Hjälpmedel – vad gäller?</h3>
+      <ul>
+        <li><strong>Matematik A:</strong> Utan miniräknare (40 min)</li>
+        <li><strong>Matematik B, C, D:</strong> Med miniräknare</li>
+        <li><strong>Engelska / Svenska:</strong> Inga hjälpmedel</li>
+        <li><strong>NO / SO:</strong> Se respektive provhäfte</li>
+        <li>VT 2026: Alla prov genomförs på <strong>papper</strong> (ej digitalt)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <span style="font-size:1rem;flex-shrink:0">⚠️</span>
+    <div>
+      <strong>Datumen är verifierade</strong> mot Skolverkets föreskrifter (SKOLFS 2025:1–2), Uppsala universitets och Umeå universitets officiella provinfo. Alla fasta provdatum börjar kl 09:00.
+      Om rektor beslutar om senareläggning gäller det hela skolenheten.
+      Kontrollera alltid med din skola och <a href="https://www.skolverket.se/prov-och-bedomning/nationella-prov/provdatum" style="color:inherit;text-decoration:underline">skolverket.se/provdatum</a> för det senaste.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Källa: <a href="https://www.skolverket.se">Skolverket</a> · Nationella prov åk 9 VT 2026 · Sidan är informativ och inte officiell
+</footer>
+
+<script>
+  // ── DATA ─────────────────────────────────────────────────
+  // Datum verifierade mot Skolverket, Uppsala univ., Umeå univ. och kommunala skolor.
+  // Källa: SKOLFS 2025:1–2. Alla fasta provdatum börjar kl 09:00.
+  // OBS: Proven genomförs på papper VT 2026 (ej digitalt).
+  // NO/SO: Varje skola tilldelas ETT ämne – Skolverket meddelar vilket.
+  const exams = [
+    // MARS – Svenska / Svenska som andraspråk
+    { date: '2026-03-11', subject: 'sv',  label: 'sv',  title: 'Svenska / Sva – Delprov B',        duration: 'ca 80 min',   type: 'Läsförståelse',           aids: 'Inga hjälpmedel' },
+    { date: '2026-03-13', subject: 'sv',  label: 'sv',  title: 'Svenska / Sva – Delprov C',        duration: 'ca 80 min',   type: 'Skrivuppgift',            aids: 'Inga hjälpmedel' },
+
+    // MARS – Engelska
+    { date: '2026-03-24', subject: 'en',  label: 'en',  title: 'Engelska – Delprov B',             duration: 'ca 80 min',   type: 'Läs- & hörförståelse',    aids: 'Inga hjälpmedel' },
+    { date: '2026-03-26', subject: 'en',  label: 'en',  title: 'Engelska – Delprov C',             duration: 'ca 60 min',   type: 'Skriftlig produktion',    aids: 'Inga hjälpmedel' },
+
+    // APRIL – NO (skolan tilldelas ett av ämnena: Bi, Fy eller Ke)
+    { date: '2026-04-22', subject: 'no',  label: 'no',  title: 'NO – Delprov A + B (Bi / Fy / Ke)', duration: '90 + 90 min', type: 'Skriftligt (2 delar)',    aids: 'Se provhäfte' },
+
+    // MAJ – SO (skolan tilldelas ett av ämnena: Ge, Hi, Re eller Sh)
+    { date: '2026-05-05', subject: 'so',  label: 'so',  title: 'SO – Delprov A (Ge / Hi / Re / Sh)', duration: 'ca 90 min',  type: 'Skriftligt',              aids: 'Se provhäfte' },
+    { date: '2026-05-07', subject: 'so',  label: 'so',  title: 'SO – Delprov B (Ge / Hi / Re / Sh)', duration: 'ca 90 min',  type: 'Skriftligt',              aids: 'Se provhäfte' },
+
+    // MAJ – Matematik
+    { date: '2026-05-11', subject: 'ma',  label: 'ma',  title: 'Matematik – Delprov A + B',        duration: '40 + 80 min', type: 'Skriftligt (2 delar)',    aids: 'A: utan, B: med miniräknare' },
+    { date: '2026-05-13', subject: 'ma',  label: 'ma',  title: 'Matematik – Delprov C + D',        duration: '40 + 80 min', type: 'Skriftligt (2 delar)',    aids: 'C+D: med miniräknare' },
+  ];
+
+  const subjectNames = {
+    sv: 'Svenska / Sva', en: 'Engelska',
+    ma: 'Matematik', no: 'NO (Bi / Fy / Ke)',
+    so: 'SO (Ge / Hi / Re / Sh)'
+  };
+
+  const weekdays = ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'];
+  const monthNames = ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  function parseDate(str) {
+    const [y,m,d] = str.split('-').map(Number);
+    return new Date(y, m-1, d);
+  }
+
+  function diffDays(d) {
+    return Math.round((d - today) / 86400000);
+  }
+
+  // ── BUILD COUNTDOWN BAR ────────────────────────────────
+  function buildCountdown() {
+    const bar = document.getElementById('countdown-bar');
+    const nextLabel = document.getElementById('next-exam-label');
+
+    const upcoming = exams
+      .map(e => ({ ...e, d: parseDate(e.date), diff: diffDays(parseDate(e.date)) }))
+      .filter(e => e.diff >= 0)
+      .sort((a, b) => a.diff - b.diff)
+      .slice(0, 6);
+
+    if (upcoming.length === 0) {
+      nextLabel.textContent = 'Alla prov klara!';
+      bar.innerHTML = '<div class="countdown-card"><div class="label">Status</div><div class="subject">Alla prov genomförda 🎉</div></div>';
+      return;
+    }
+
+    nextLabel.textContent = upcoming[0].title.split('–')[0].trim() + ' · ' + upcoming[0].d.toLocaleDateString('sv-SE', { day:'numeric', month:'short' });
+
+    upcoming.forEach(e => {
+      const card = document.createElement('div');
+      card.className = 'countdown-card';
+      const daysText = e.diff === 0 ? '<span>idag</span>' : `${e.diff} <span>dag${e.diff !== 1 ? 'ar' : ''}</span>`;
+      card.innerHTML = `
+        <div class="label">${e.d.toLocaleDateString('sv-SE', { day:'numeric', month:'short' })}</div>
+        <div class="subject">${e.title.split('–')[1]?.trim() || e.title}</div>
+        <div class="days">${daysText}</div>
+      `;
+      bar.appendChild(card);
+    });
+  }
+
+  // ── BUILD TIMELINE ─────────────────────────────────────
+  function buildTimeline(filter = 'all') {
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '';
+
+    const groups = {};
+    exams.forEach(e => {
+      if (filter !== 'all' && e.label !== filter) return;
+      const d = parseDate(e.date);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      if (!groups[key]) groups[key] = { month: d.getMonth(), year: d.getFullYear(), items: [] };
+      groups[key].items.push({ ...e, d });
+    });
+
+    Object.values(groups).sort((a,b) => a.year !== b.year ? a.year-b.year : a.month-b.month).forEach(g => {
+      const group = document.createElement('div');
+      group.className = 'month-group';
+
+      const label = document.createElement('div');
+      label.className = 'month-label';
+      label.textContent = monthNames[g.month] + ' ' + g.year;
+      group.appendChild(label);
+
+      const grid = document.createElement('div');
+      grid.className = 'exams-grid';
+
+      g.items.sort((a,b) => a.d - b.d).forEach(e => {
+        const diff = diffDays(e.d);
+        const card = document.createElement('div');
+        card.className = 'exam-card' + (diff < 0 ? ' past' : diff === 0 ? ' today' : '');
+        card.dataset.subject = e.subject;
+
+        card.innerHTML = `
+          <div class="date-col">
+            <div class="date-day">${e.d.getDate()}</div>
+            <div class="date-month">${monthNames[e.d.getMonth()].slice(0,3)}</div>
+            <div class="date-weekday">${weekdays[e.d.getDay()]}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-subject-badge">${subjectNames[e.subject]}</div>
+            <div class="card-title">${e.title}</div>
+            <div class="card-meta">
+              <span>⏱ ${e.duration}</span>
+              <span>📝 ${e.type}</span>
+              <span>🔧 ${e.aids}</span>
+            </div>
+          </div>
+          ${diff === 0 ? '<div class="today-badge">Idag</div>' : ''}
+        `;
+        grid.appendChild(card);
+      });
+
+      group.appendChild(grid);
+      timeline.appendChild(group);
+    });
+
+    if (timeline.innerHTML === '') {
+      timeline.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem">Inga prov matchar filtret.</p>';
+    }
+  }
+
+  // ── FILTER BUTTONS ─────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      buildTimeline(btn.dataset.filter);
+    });
+  });
+
+  // ── INIT ───────────────────────────────────────────────
+  buildCountdown();
+  buildTimeline();
+</script>
+</body>
+</html>
